@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  postgres-user:
+     image: postgres:15.2-alpine
+     ports:
+       - "5432:5432"
+     environment:
+       POSTGRES_DB: user-service
+       POSTGRES_USER: "postgres"
+       POSTGRES_PASSWORD: "pass"
+       PGDATA: /var/lib/postgresql/data/pgdata
+     volumes:
+       - /var/postgres
+     restart: unless-stopped
+  pgadmin-post:
+    image: dpage/pgadmin4:7.0
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "user@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "pass"
+    volumes:
+      - /var/lib/pgadmin
